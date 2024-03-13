@@ -1,6 +1,9 @@
 const { comparePassword } = require("../helper/bcrypt");
 const { signToken } = require("../helper/jwt");
 const { User } = require("../models");
+require("dotenv").config();
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client();
 class UserController {
   static async register(req, res, next) {
     try {
@@ -32,7 +35,32 @@ class UserController {
       const access_token = signToken({ id: data.id });
       res.status(201).json({ token: access_token });
     } catch (error) {
-      console.log(error);
+      next(error);
+    }
+  }
+  static async GoogleLogin(req, res, next) {
+    try {
+      const { tokenGoogle } = req.body;
+      const clientId = process.env.Client_Id;
+      const ticket = await client.verifyIdToken({
+        idToken: tokenGoogle,
+        audience: clientId,
+      });
+      const { name, email } = ticket.getPayload();
+
+      const [user, created] = await User.findOrCreate({
+        where: { email },
+        defaults: {
+          username: name,
+          email: email,
+          password: Math.random().toString(),
+        },
+      });
+      const access_token = signToken({ id: user.id });
+      res
+        .status(200)
+        .json({ message: `loggin from ${user.email}`, access_token });
+    } catch (error) {
       next(error);
     }
   }
