@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.INTEGER,
       released: DataTypes.DATE,
       imageUrl: DataTypes.STRING,
-      rating: DataTypes.INTEGER,
+      rating: DataTypes.FLOAT,
       UserId: {
         type: DataTypes.INTEGER,
         unique: true,
@@ -31,10 +31,39 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         unique: true,
       },
+      rent: {
+        type: DataTypes.INTEGER,
+        validate: {
+          notEmpty: {
+            msg: "rent is required",
+          },
+          max: {
+            args: 6,
+            msg: "max of rent is only 6 month",
+          },
+        },
+      },
     },
     {
       sequelize,
       modelName: "Game",
+      hooks: {
+        beforeCreate(value) {
+          if (value.rent === 1) {
+            value.price = 100_000;
+          } else if (value.rent === 2) {
+            value.price = 200_000;
+          } else if (value.rent === 3) {
+            value.price = 300_000;
+          } else if (value.rent === 4) {
+            value.price = 400_000;
+          } else if (value.rent === 5) {
+            value.price = 500_000;
+          } else if (value.rent === 6) {
+            value.price = 600_000;
+          }
+        },
+      },
     }
   );
   return Game;

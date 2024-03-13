@@ -22,7 +22,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       rating: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       UserId: {
         type: Sequelize.INTEGER,
@@ -34,6 +34,9 @@ module.exports = {
         onUpdate: "cascade",
       },
       GameId: {
+        type: Sequelize.INTEGER,
+      },
+      rent: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

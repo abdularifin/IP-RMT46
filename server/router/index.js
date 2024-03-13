@@ -9,6 +9,12 @@ const router = express.Router();
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 router.get("/allGames", authentication, GamesController.FindAllGames);
+router.post(
+  "/add-game/:id",
+  authentication,
+
+  GamesController.addGame
+);
 
 router.use(errorHandler);
 module.exports = router;
