@@ -6,9 +6,29 @@ const { Game } = require("../models");
 class GamesController {
   static async FindAllGames(req, res, next) {
     try {
+      const { search, genres, ordering, page } = req.query;
+      const options = {};
+      if (search) {
+        //!search game
+        options.search = search;
+      }
+      if (genres) {
+        //!filter by genre
+        options.genres = genres;
+      }
+      if (ordering) {
+        //!sort by name
+        options.ordering = ordering;
+      }
+      if (page) {
+        //!page
+        options.page = page;
+      }
+      const queryString = new URLSearchParams(options).toString();
       let response = await axios.get(
-        "https://api.rawg.io/api/games?key=" + api
+        "https://api.rawg.io/api/games?key=" + api + "&" + queryString
       );
+
       res.status(200).json(
         response.data.results.map((el) => {
           return {
@@ -17,6 +37,7 @@ class GamesController {
             released: el.released,
             imageUrl: el.background_image,
             rating: el.rating,
+            genre: el.genres,
           };
         })
       );
