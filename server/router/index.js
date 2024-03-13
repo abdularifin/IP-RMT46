@@ -15,6 +15,12 @@ router.post(
 
   GamesController.addGame
 );
+router.put(
+  "/update-game/:id",
+  authentication,
+  authorization,
+  GamesController.updateGame
+);
 
 router.use(errorHandler);
 module.exports = router;

@@ -52,6 +52,23 @@ class GamesController {
   }
   static async updateGame(req, res, next) {
     try {
+      const { id } = req.params;
+      const { GameId } = req.body;
+      const game = await axios.get(
+        "https://api.rawg.io/api/games/" + GameId + "?key=" + api
+      );
+      const data = {
+        name: game.data.name,
+        released: game.data.released,
+        imageUrl: game.data.background_image,
+        rating: game.data.rating,
+
+        UserId: req.user.id,
+      };
+      await Game.update(data, { where: { id: id } });
+      const respons = await Game.findByPk(id);
+
+      res.status(201).json(respons);
     } catch (error) {
       next(error);
     }
