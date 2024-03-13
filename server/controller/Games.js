@@ -45,7 +45,7 @@ class GamesController {
 
       const respons = await Game.create(data);
 
-      res.status(201).json(respons);
+      res.status(201).json({ message: `${respons.name} has been added` });
     } catch (error) {
       next(error);
     }
@@ -54,6 +54,7 @@ class GamesController {
     try {
       const { id } = req.params;
       const { GameId } = req.body;
+      const game1 = await Game.findByPk(id);
       const game = await axios.get(
         "https://api.rawg.io/api/games/" + GameId + "?key=" + api
       );
@@ -68,7 +69,20 @@ class GamesController {
       await Game.update(data, { where: { id: id } });
       const respons = await Game.findByPk(id);
 
-      res.status(201).json(respons);
+      res
+        .status(201)
+        .json({ message: `${game1.name} has been changes to ${respons.name}` });
+    } catch (error) {
+      next(error);
+    }
+  }
+  static async DeleteGame(req, res, next) {
+    try {
+      const { id } = req.params;
+      const data = await Game.findByPk(id);
+      if (!data) throw { name: "NotFound", message: "game not found" };
+      await Game.destroy({ where: { id: id } });
+      res.status(200).json({ message: `${data.name} has been deleted` });
     } catch (error) {
       next(error);
     }

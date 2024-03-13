@@ -21,6 +21,12 @@ router.put(
   authorization,
   GamesController.updateGame
 );
+router.delete(
+  "/delete-game/:id",
+  authentication,
+  authorization,
+  GamesController.DeleteGame
+);
 
 router.use(errorHandler);
 module.exports = router;
