@@ -98,13 +98,10 @@ class GamesController {
       next(error);
     }
   }
-  static async DeleteGame(req, res, next) {
+  static async AllGame(req, res, next) {
     try {
-      const { id } = req.params;
-      const data = await Game.findByPk(id);
-      if (!data) throw { name: "NotFound", message: "game not found" };
-      await Game.destroy({ where: { id: id } });
-      res.status(200).json({ message: `${data.name} has been deleted` });
+      const game = await Game.findAll();
+      res.status(200).json(game);
     } catch (error) {
       next(error);
     }

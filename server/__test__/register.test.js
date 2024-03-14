@@ -67,7 +67,7 @@ let data2 = {
 //   });
 // });
 
-describe.skip("POST /register", () => {
+describe("POST /register", () => {
   //!test register user berhasil
   describe("succes", () => {
     test("should able register user ", async () => {

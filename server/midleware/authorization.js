@@ -5,15 +5,15 @@ const authorization = async (req, res, next) => {
     const { id } = req.params;
     const userId = req.user.id;
     const game = await Cart.findByPk(id);
-    console.log(game);
+
     if (!game) {
-      throw { name: "NotFound", message: `game not found` };
+      throw { name: "NotFound", msg: `game not found` };
     }
 
     if (game.UserId !== userId) {
       throw {
         name: "Forbidden",
-        message: `You're not authorized to delete this game`,
+        msg: `You're not authorized to delete this game`,
       };
     }
     req.game = game;

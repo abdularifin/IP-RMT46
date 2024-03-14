@@ -8,7 +8,8 @@ class CartController {
     try {
       const { id } = req.params;
       const { rent } = req.body;
-      if (!id) throw { name: "NotFound", msg: "game not found" };
+
+      if (!rent) throw { name: "BadRequest", msg: "rent is required" };
       const game = await axios.get(
         "https://api.rawg.io/api/games/" + id + "?key=" + api
       );
@@ -34,8 +35,10 @@ class CartController {
       const { id } = req.params;
       const { GameId } = req.body;
 
+      if (!GameId) throw { name: "BadRequest", msg: "GameId is required" };
       const game1 = await Cart.findByPk(id);
-
+      console.log(game1);
+      if (!game1) throw { name: "NotFound", msg: "Game not found" };
       const game = await axios.get(
         "https://api.rawg.io/api/games/" + GameId + "?key=" + api
       );

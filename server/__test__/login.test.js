@@ -18,7 +18,7 @@ let data = {
 };
 
 //!test login
-describe.skip("post /login", function () {
+describe("post /login", function () {
   describe("success", () => {
     test("should return status 201 and object of new user", async () => {
       let respons = await request(app)

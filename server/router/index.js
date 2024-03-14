@@ -9,11 +9,12 @@ const CartController = require("../controller/cart");
 const router = express.Router();
 const routerUser = require("./user");
 const routerCart = require("./cart");
-
+const routerGame = require("./game");
 router.use(routerUser);
-router.get("/allGames", authentication, GamesController.FindAllGames);
 router.use(authentication);
+router.get("/allGames", GamesController.FindAllGames);
 router.use(routerCart);
+router.use(routerGame);
 router.post("/generate-midtrans-token", MidtransController.midtransToken);
 
 router.use(errorHandler);
