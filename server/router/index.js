@@ -4,6 +4,8 @@ const GamesController = require("../controller/Games");
 const errorHandler = require("../midleware/errorHandling");
 const authentication = require("../midleware/authentication");
 const authorization = require("../midleware/authorization");
+const MidtransController = require("../controller/midtrans");
+const CartController = require("../controller/cart");
 const router = express.Router();
 
 router.post("/register", UserController.register);
@@ -14,19 +16,27 @@ router.post(
   "/add-game/:id",
   authentication,
 
-  GamesController.addGame
+  CartController.addCart
 );
 router.put(
   "/update-game/:id",
   authentication,
   authorization,
-  GamesController.updateGame
+  CartController.UpdateCart
 );
 router.delete(
   "/delete-game/:id",
   authentication,
   authorization,
-  GamesController.DeleteGame
+  CartController.DeleteCart
+);
+router.get("/cart", authentication, CartController.allCart);
+
+router.post(
+  "/generate-midtrans-token",
+  authentication,
+
+  MidtransController.midtransToken
 );
 
 router.use(errorHandler);

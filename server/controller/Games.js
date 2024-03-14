@@ -1,4 +1,5 @@
 const axios = require("axios");
+
 require("dotenv").config();
 const api = process.env.Api_Key;
 const { Game } = require("../models");

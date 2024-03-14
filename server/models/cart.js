@@ -1,18 +1,17 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Game extends Model {
+  class Cart extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      Game.belongsTo(models.User, { foreignKey: "UserId" });
+      Cart.belongsTo(models.User, { foreignKey: "UserId" });
     }
   }
-  Game.init(
+  Cart.init(
     {
       name: DataTypes.STRING,
       price: DataTypes.INTEGER,
@@ -31,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         unique: true,
       },
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       rent: {
         type: DataTypes.INTEGER,
         validate: {
@@ -46,24 +49,25 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Game",
+      modelName: "Cart",
       hooks: {
-        afterCreate: async (game) => {
-          const rentEndDate = new Date(game.createdAt);
-          rentEndDate.setMonth(rentEndDate.getMonth() + game.rent);
-
-          const timeLeft = rentEndDate - Date.now();
-
-          if (timeLeft <= 0) {
-            await game.destroy();
-          } else {
-            setTimeout(async () => {
-              await game.destroy();
-            }, timeLeft);
+        beforeCreate(value) {
+          if (value.rent === 1) {
+            value.price = 100_000;
+          } else if (value.rent === 2) {
+            value.price = 200_000;
+          } else if (value.rent === 3) {
+            value.price = 300_000;
+          } else if (value.rent === 4) {
+            value.price = 400_000;
+          } else if (value.rent === 5) {
+            value.price = 500_000;
+          } else if (value.rent === 6) {
+            value.price = 600_000;
           }
         },
       },
     }
   );
-  return Game;
+  return Cart;
 };
