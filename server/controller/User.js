@@ -13,7 +13,7 @@ class UserController {
         email,
         password,
       });
-      res.status(201).json(`${data.username} has ready to login`);
+      res.status(201).json({ msg: `${data.username} has ready to login` });
     } catch (error) {
       next(error);
     }
@@ -21,9 +21,9 @@ class UserController {
   static async login(req, res, next) {
     try {
       const { email, password } = req.body;
-      if (!email) throw { name: "Bad Request", msg: "email must be exist" };
+      if (!email) throw { name: "BadRequest", msg: "email must be exist" };
       if (!password)
-        throw { name: "Bad Request", msg: "password must be exist" };
+        throw { name: "BadRequest", msg: "password must be exist" };
       const data = await User.findOne({ where: { email } });
       if (!data) {
         throw { name: "unauthorized", msg: "email/password invalid" };

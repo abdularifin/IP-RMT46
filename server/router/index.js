@@ -7,37 +7,14 @@ const authorization = require("../midleware/authorization");
 const MidtransController = require("../controller/midtrans");
 const CartController = require("../controller/cart");
 const router = express.Router();
+const routerUser = require("./user");
+const routerCart = require("./cart");
 
-router.post("/register", UserController.register);
-router.post("/login", UserController.login);
-router.post("/google-login", UserController.GoogleLogin);
+router.use(routerUser);
 router.get("/allGames", authentication, GamesController.FindAllGames);
-router.post(
-  "/add-game/:id",
-  authentication,
-
-  CartController.addCart
-);
-router.put(
-  "/update-game/:id",
-  authentication,
-  authorization,
-  CartController.UpdateCart
-);
-router.delete(
-  "/delete-game/:id",
-  authentication,
-  authorization,
-  CartController.DeleteCart
-);
-router.get("/cart", authentication, CartController.allCart);
-
-router.post(
-  "/generate-midtrans-token",
-  authentication,
-
-  MidtransController.midtransToken
-);
+router.use(authentication);
+router.use(routerCart);
+router.post("/generate-midtrans-token", MidtransController.midtransToken);
 
 router.use(errorHandler);
 module.exports = router;
