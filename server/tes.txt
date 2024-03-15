@@ -1,0 +1,26 @@
+Commands:
+  sequelize db:migrate                        Run pending migrations
+  sequelize db:migrate:schema:timestamps:add  Update migration table to have timestamps
+  sequelize db:migrate:status                 List the status of all migrations
+  sequelize db:migrate:undo                   Reverts a migration
+  sequelize db:migrate:undo:all               Revert all migrations ran
+  sequelize db:seed                           Run specified seeder
+  sequelize db:seed:undo                      Deletes data from the database
+  sequelize db:seed:all                       Run every seeder
+  sequelize db:seed:undo:all                  Deletes data from the database
+  sequelize db:create                         Create database specified by configuration
+  sequelize db:drop                           Drop database specified by configuration
+   sequelize init                             Initializes project
+  sequelize init:config                       Initializes configuration
+  sequelize init:migrations                   Initializes migrations
+  sequelize init:models                       Initializes models
+  sequelize init:seeders                      Initializes seeders
+  sequelize migration:generate                Generates a new migration file
+  sequelize migration:create                  Generates a new migration file
+  sequelize model:generate                    Generates a model and its migration
+  sequelize model:create                      Generates a model and its migration
+  sequelize seed:generate                     Generates a new seed file
+  sequelize seed:create                       Generates a new seed file
+
+
+  eyJhbGciOiJSUzI1NiIsImtpZCI6IjA4YmY1YzM3NzJkZDRlN2E3MjdhMTAxYmY1MjBmNjU3NWNhYzMyNmYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1NjE1ODUwMzY1NTQtMjZuZXRhbGgxNGtqOTJia2hscjAxM2Nic21vbDhlOWUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1NjE1ODUwMzY1NTQtMjZuZXRhbGgxNGtqOTJia2hscjAxM2Nic21vbDhlOWUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDE5MzI2MjE4MDMxNjEyMTYzMzAiLCJlbWFpbCI6ImFiZHVsLmFyaWZpbjY3NjdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTcxMDM0NTAwMSwibmFtZSI6ImFiZHVsIGFyaWZpbiIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLLVhJc0l5ZDMzNTlKZGN3eWNpcW1XejQ5XzJKT1FPUVBDVlFfc0dXdjk9czk2LWMiLCJnaXZlbl9uYW1lIjoiYWJkdWwiLCJmYW1pbHlfbmFtZSI6ImFyaWZpbiIsImxvY2FsZSI6ImlkIiwiaWF0IjoxNzEwMzQ1MzAxLCJleHAiOjE3MTAzNDg5MDEsImp0aSI6IjQxODZiZTczYTU3Y2RmYjNiZTMyMThkYTdiNjExYmIxMjFkMGM4NWUifQ.UPDBLqp2IHyHKwzL2zcGZpPvUHTOUmbahBpzhBWK4_uBPC69mRMdxlouFcOfXUd9fuZflyom6pFKpp_xMQq7lSUyQ5BENnoBcTXIZ51zCROyHn4z4on_4AxPCaLkAE1LgbktpJpKimjssXnOH6239Nn5t60JHu_i-BtCrFtqngSAkgyIjhGlxmCCp1b6gHFS8wIrYu5g4uUcbQ9ChtBwldZ-J3x-qLUCBUoFNJ5Qm68pGgqoSxo9x71HGJZiCpv7gWFfRsoDaOQt1CYIfW8MiBZpD1OLRshTMa90_TtqbFD-sXoHjzbdM268WnWJf8pmK6BjFbvifbG-uaCkoZwLNw
