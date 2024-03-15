@@ -80,9 +80,9 @@ class GamesController {
     try {
       const { id } = req.params;
       const { GameId } = req.body;
-      console.log(GameId);
+
       const game1 = await Game.findByPk(id);
-      console.log(game1);
+
       if (!game1) throw { name: "NotFound", msg: "game not found" };
       const game = await axios.get(
         "https://api.rawg.io/api/games/" + GameId + "?key=" + api
