@@ -2,7 +2,7 @@ const axios = require("axios");
 
 require("dotenv").config();
 const api = process.env.Api_Key;
-const { Game } = require("../models");
+const { Game, Cart, User } = require("../models");
 
 class GamesController {
   static async FindAllGames(req, res, next) {
@@ -49,25 +49,29 @@ class GamesController {
   }
   static async addGame(req, res, next) {
     try {
-      const { id } = req.params;
-      const { rent } = req.body;
-
-      const game = await axios.get(
-        "https://api.rawg.io/api/games/" + id + "?key=" + api
-      );
-      const data = {
-        name: game.data.name,
-        released: game.data.released,
-        imageUrl: game.data.background_image,
-        rating: game.data.rating,
-        rent: +rent,
-        GameId: game.data.id,
-        UserId: req.user.id,
-      };
-
-      const respons = await Game.create(data);
-
-      res.status(201).json({ message: `${respons.name} has been added` });
+      const cartsdata = await Cart.findAll({ where: { UserId: req.user.id } });
+      if (!cartsdata) {
+        throw new Error("No carts found to create games");
+      }
+      // const newRentDate = new Date();
+      // newRentDate.setMonth(newRentDate.getMonth() + el.rent);
+      // el.rent = newRentDate;
+      const gamesData = cartsdata.map((cart) => ({
+        name: cart.name,
+        price: cart.price,
+        released: cart.released,
+        imageUrl: cart.imageUrl,
+        rating: cart.rating,
+        UserId: cart.UserId,
+        GameId: cart.GameId,
+        rent: new Date().setMonth(new Date().getMonth() + cart.rent),
+        status: true,
+      }));
+      const game = await Game.bulkCreate(gamesData);
+      await Cart.destroy({
+        truncate: true,
+      });
+      res.status(201).json(game);
     } catch (error) {
       next(error);
     }
@@ -76,7 +80,10 @@ class GamesController {
     try {
       const { id } = req.params;
       const { GameId } = req.body;
+      console.log(GameId);
       const game1 = await Game.findByPk(id);
+      console.log(game1);
+      if (!game1) throw { name: "NotFound", msg: "game not found" };
       const game = await axios.get(
         "https://api.rawg.io/api/games/" + GameId + "?key=" + api
       );
@@ -85,7 +92,6 @@ class GamesController {
         released: game.data.released,
         imageUrl: game.data.background_image,
         rating: game.data.rating,
-
         UserId: req.user.id,
       };
       await Game.update(data, { where: { id: id } });

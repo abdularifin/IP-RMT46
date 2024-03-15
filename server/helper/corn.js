@@ -1,6 +1,6 @@
 // // helpers/cron.js
 // const {CronJob} = require("cron")
-// const {RentGame} = require("../models")
+// const {Game} = require("../models")
 
 // const threeHoursInMillisecond = 3 * 60 * 60 * 1000;
 // module.exports = () => {
@@ -11,7 +11,7 @@
 //       setTimeout(() => {
 //         // Destroy the item here
 //         // rentGame.destroy();
-//         rentGame.update({status: false})
+//         Game.update({status: false})
 //       }, selisihSekarang ke waktu rentnya habis);
 //     });
 //   });

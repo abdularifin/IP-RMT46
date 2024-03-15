@@ -27,19 +27,19 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       GameId: {
         type: DataTypes.INTEGER,
         unique: true,
       },
       rent: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DATE,
         validate: {
           notEmpty: {
             msg: "rent is required",
-          },
-          max: {
-            args: 6,
-            msg: "max of rent is only 6 month",
           },
         },
       },
@@ -47,22 +47,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Game",
-      hooks: {
-        afterCreate: async (game) => {
-          const rentEndDate = new Date(game.createdAt);
-          rentEndDate.setMonth(rentEndDate.getMonth() + game.rent);
-
-          const timeLeft = rentEndDate - Date.now();
-
-          if (timeLeft <= 0) {
-            await game.destroy();
-          } else {
-            setTimeout(async () => {
-              await game.destroy();
-            }, timeLeft);
-          }
-        },
-      },
     }
   );
   return Game;

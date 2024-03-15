@@ -37,7 +37,11 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       rent: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DATE,
+      },
+      status: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
