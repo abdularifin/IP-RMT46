@@ -12,7 +12,6 @@ const authorizationCart = async (req, res, next) => {
       throw { name: "NotFound", msg: `game not found` };
     }
 
-    // console.log(userId);
     if (game.UserId !== userId) {
       throw {
         name: "Forbidden",

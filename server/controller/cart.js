@@ -33,28 +33,20 @@ class CartController {
   static async UpdateCart(req, res, next) {
     try {
       const { id } = req.params;
-      const { GameId } = req.body;
+      const { rent } = req.body;
 
-      if (!GameId) throw { name: "BadRequest", msg: "GameId is required" };
       const game1 = await Cart.findByPk(id);
-      console.log(game1);
+
       if (!game1) throw { name: "NotFound", msg: "Game not found" };
-      const game = await axios.get(
-        "https://api.rawg.io/api/games/" + GameId + "?key=" + api
-      );
-      const data = {
-        name: game.data.name,
-        released: game.data.released,
-        imageUrl: game.data.background_image,
-        rating: game.data.rating,
-        UserId: req.user.id,
-      };
-      await Cart.update(data, { where: { id: id } });
+      console.log(game1);
+
+      // const data =
+      await Cart.update({ rent: rent }, { where: { id: id } });
       const respons = await Cart.findByPk(id);
 
-      res
-        .status(201)
-        .json({ message: `${game1.name} has been changes to ${respons.name}` });
+      res.status(201).json({
+        message: `${game1.name} rent duration has changed from ${game1.rent} to ${respons.rent}`,
+      });
     } catch (error) {
       next(error);
     }
@@ -73,7 +65,7 @@ class CartController {
   }
   static async allCart(req, res, next) {
     try {
-      const cart = await Cart.findAll();
+      const cart = await Cart.findAll({ where: { UserId: req.user.id } });
       res.status(200).json(cart);
     } catch (error) {
       next(error);
