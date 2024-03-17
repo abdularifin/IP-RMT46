@@ -25,3 +25,5 @@ Commands:
 
   DB_PASSWORD=Ixf0NoNynRIbHs6b
   postgres://postgres.bqnmsqpfujklrbbtrqrt:Ixf0NoNynRIbHs6b@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres
+  
+  pass github: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
