@@ -23,8 +23,8 @@ const MyCart = () => {
   };
   const handleBuyGame = async (event) => {
     event.preventDefault();
-    dispatch(buyGame());
-    nav("/myGame");
+
+    dispatch(buyGame(nav));
   };
 
   return (

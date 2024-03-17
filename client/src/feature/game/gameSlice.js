@@ -29,10 +29,13 @@ export const fetchGames = (searchText, filter, currentPage, getSort) => {
         page: currentPage,
         ordering: getSort,
       };
-      const response = await axios.get("http://localhost:3000/allGames", {
-        headers,
-        params,
-      });
+      const response = await axios.get(
+        "https://branded-things.gj6767.site/allGames",
+        {
+          headers,
+          params,
+        }
+      );
 
       dispatch(setGames(response.data));
     } catch (error) {
@@ -50,7 +53,7 @@ export const createCart = (getRent, id) => {
       };
 
       await axios.post(
-        `http://localhost:3000/add-cart/${id}`,
+        `https://branded-things.gj6767.site/add-cart/${id}`,
         { rent: getRent },
         { headers }
       );
