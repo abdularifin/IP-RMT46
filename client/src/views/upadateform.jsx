@@ -16,9 +16,8 @@ const UpdateCart = () => {
   };
 
   const { id } = useParams();
-  const handleEdit = () => {
-    dispatch(updateCart(id, getRent));
-    nav("/myCart");
+  const handleEdit = (nav) => {
+    dispatch(updateCart(id, getRent, nav));
   };
 
   return (

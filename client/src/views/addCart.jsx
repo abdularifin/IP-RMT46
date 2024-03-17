@@ -16,8 +16,8 @@ const AddCart = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(createCart(getRent, id));
-    nav("/");
+    dispatch(createCart(getRent, id, nav));
+    // nav("/");
   };
 
   return (

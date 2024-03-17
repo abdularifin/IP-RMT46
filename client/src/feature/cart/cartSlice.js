@@ -59,7 +59,7 @@ export const DeleteCart = (id) => {
   };
 };
 
-export const updateCart = (id, getRent) => {
+export const updateCart = (id, getRent, nav) => {
   return async () => {
     try {
       const token = localStorage.getItem("token");
@@ -71,6 +71,7 @@ export const updateCart = (id, getRent) => {
         { rent: getRent },
         { headers }
       );
+      nav("/myCart");
     } catch (error) {
       console.log(error);
     }

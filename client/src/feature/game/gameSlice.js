@@ -44,7 +44,7 @@ export const fetchGames = (searchText, filter, currentPage, getSort) => {
   };
 };
 
-export const createCart = (getRent, id) => {
+export const createCart = (getRent, id, nav) => {
   return async () => {
     try {
       const token = localStorage.getItem("token");
@@ -57,6 +57,7 @@ export const createCart = (getRent, id) => {
         { rent: getRent },
         { headers }
       );
+      nav("/");
     } catch (error) {
       console.log(error);
     }

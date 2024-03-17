@@ -16,13 +16,14 @@ export const userSlice = createSlice({
 
 export const { setUsers } = userSlice.actions;
 
-export const register = (getUser) => {
+export const register = (getUser, nav) => {
   return async () => {
     try {
       const response = await axios.post(
         "https://branded-things.gj6767.site/register",
         getUser
       );
+      nav("/login");
     } catch (error) {
       console.log(error);
     }
