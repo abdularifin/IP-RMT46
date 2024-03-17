@@ -23,9 +23,12 @@ export const fetchMyGames = () => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const response = await axios.get("http://localhost:3000/my-game", {
-        headers,
-      });
+      const response = await axios.get(
+        "https://branded-things.gj6767.site/my-game",
+        {
+          headers,
+        }
+      );
       console.log(response);
       dispatch(setmyGames(response.data));
     } catch (error) {

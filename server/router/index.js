@@ -1,11 +1,11 @@
 const express = require("express");
-const UserController = require("../controller/User");
+
 const GamesController = require("../controller/Games");
 const errorHandler = require("../midleware/errorHandling");
 const authentication = require("../midleware/authentication");
-const authorization = require("../midleware/authorization");
+
 const MidtransController = require("../controller/midtrans");
-const CartController = require("../controller/cart");
+
 const router = express.Router();
 const routerUser = require("./user");
 const routerCart = require("./cart");

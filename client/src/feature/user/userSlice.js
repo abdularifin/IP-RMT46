@@ -16,13 +16,14 @@ export const userSlice = createSlice({
 
 export const { setUsers } = userSlice.actions;
 
-export const register = (getUser) => {
+export const register = (getUser, nav) => {
   return async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/register",
+        "https://branded-things.gj6767.site/register",
         getUser
       );
+      nav("/login");
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +33,10 @@ export const register = (getUser) => {
 export const login = (getUser) => {
   return async () => {
     try {
-      const response = await axios.post("http://localhost:3000/login", getUser);
+      const response = await axios.post(
+        "https://branded-things.gj6767.site/login",
+        getUser
+      );
       localStorage.setItem("token", response.data.token);
       console.log(response);
     } catch (error) {

@@ -29,9 +29,12 @@ const LoginPage = () => {
 
   const handleCredentialResponse = async ({ credential }) => {
     try {
-      const { data } = await axios.post("http://localhost:3000/google-login", {
-        tokenGoogle: credential,
-      });
+      const { data } = await axios.post(
+        "https://branded-things.gj6767.site/google-login",
+        {
+          tokenGoogle: credential,
+        }
+      );
 
       localStorage.setItem("token", data.access_token);
       nav("/");

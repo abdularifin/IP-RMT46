@@ -24,8 +24,8 @@ const Register = () => {
   };
   const nav = useNavigate();
   const handleSubmit = () => {
-    dispatch(register(getUser));
-    nav("/login");
+    dispatch(register(getUser, nav));
+    // nav("/login");
   };
   return (
     <div>

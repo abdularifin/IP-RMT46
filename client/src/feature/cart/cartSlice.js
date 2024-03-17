@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const initialState = {
   list: [],
 };
@@ -23,9 +24,12 @@ export const fetchCart = () => {
       Authorization: `Bearer ${token}`,
     };
     try {
-      const response = await axios.get("http://localhost:3000/cart", {
-        headers,
-      });
+      const response = await axios.get(
+        "https://branded-things.gj6767.site/cart",
+        {
+          headers,
+        }
+      );
 
       dispatch(setCarts(response.data));
     } catch (error) {
@@ -42,7 +46,7 @@ export const DeleteCart = (id) => {
         Authorization: `Bearer ${token}`,
       };
       const response = await axios.delete(
-        "http://localhost:3000/delete-cart/" + id,
+        "https://branded-things.gj6767.site/delete-cart/" + id,
         {
           headers,
         }
@@ -55,7 +59,7 @@ export const DeleteCart = (id) => {
   };
 };
 
-export const updateCart = (id, getRent) => {
+export const updateCart = (id, getRent, nav) => {
   return async () => {
     try {
       const token = localStorage.getItem("token");
@@ -63,16 +67,17 @@ export const updateCart = (id, getRent) => {
         Authorization: `Bearer ${token}`,
       };
       const response = await axios.put(
-        `http://localhost:3000/update-cart/${id}`,
+        `https://branded-things.gj6767.site/update-cart/${id}`,
         { rent: getRent },
         { headers }
       );
+      nav("/myCart");
     } catch (error) {
       console.log(error);
     }
   };
 };
-export const buyGame = () => {
+export const buyGame = (nav) => {
   return async () => {
     try {
       const token = localStorage.getItem("token");
@@ -80,7 +85,7 @@ export const buyGame = () => {
         Authorization: `Bearer ${token}`,
       };
       const responseMidtrans = await axios.post(
-        "http://localhost:3000/generate-midtrans-token",
+        "https://branded-things.gj6767.site/generate-midtrans-token",
         {},
         { headers }
       );
@@ -88,12 +93,13 @@ export const buyGame = () => {
       window.snap.pay(responseMidtrans.data.token, {
         onSuccess: async function (result) {
           await axios.post(
-            "http://localhost:3000/add-game",
+            "https://branded-things.gj6767.site/add-game",
             {},
             {
               headers,
             }
           );
+          nav("/myGame");
         },
       });
     } catch (error) {
