@@ -11,6 +11,9 @@ const routerUser = require("./user");
 const routerCart = require("./cart");
 const routerGame = require("./game");
 router.use(routerUser);
+router.get("/", (req, res, next) => {
+  res.status(200).json({ message: "welcome to server" });
+});
 router.use(authentication);
 router.get("/allGames", GamesController.FindAllGames);
 router.use(routerCart);
