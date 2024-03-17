@@ -3,26 +3,16 @@ import Card from "../components/card";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CardEdit from "../components/cardGame";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMyGames } from "../feature/myGame/myGameslice";
 
 const MyGame = () => {
-  const [getGame, setGame] = useState([]);
-  const fetchGame = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      const response = await axios.get("http://localhost:3000/my-game", {
-        headers,
-      });
-      console.log(response);
-      setGame(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const [getGame, setGame] = useState([]);
+  const getGame = useSelector((state) => state.myGames.list);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchGame();
+    dispatch(fetchMyGames());
   }, []);
   return (
     <div>
