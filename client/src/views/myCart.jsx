@@ -11,10 +11,7 @@ const MyCart = () => {
   const dispatch = useDispatch();
 
   const getCart = useSelector((state) => state.carts.list);
-  const token = localStorage.getItem("token");
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+
   const nav = useNavigate();
 
   useEffect(() => {

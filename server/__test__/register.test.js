@@ -25,48 +25,6 @@ let data2 = {
   address: "Indonesia",
 };
 
-//!test login
-// describe("post /login", function () {
-//   describe("success", () => {
-//     test("should return status 201 and object of new user", async () => {
-//       let respons = await request(app)
-//         .post("/login")
-//         .send({ credential: data.username, password: data.password });
-//       console.log(respons.body);
-//       expect(respons.status).toBe(200);
-//       expect(respons.body).toHaveProperty("acces_token", expect.any(String));
-//     });
-//   });
-//   //!test login gagal
-//   describe("failed", () => {
-//     test("should return error", async () => {
-//       //!test login email dan password tidak diberikan
-//       let respons = await request(app)
-//         .post("/login")
-//         .send({ credential: "", password: "" });
-//       expect(respons.status).toBe(400);
-//       expect(respons.body).toHaveProperty("msg", expect.any(String));
-//     });
-//     test("should return error", async () => {
-//       //!test login email/username salah
-//       let respons = await request(app)
-//         .post("/login")
-//         .send({ credential: "!data.username", password: data.password });
-//       console.log(respons.body);
-//       expect(respons.status).toBe(401);
-//       expect(respons.body).toHaveProperty("msg", expect.any(String));
-//     });
-//     test("should return error", async () => {
-//       //!test login email dan password salah/tidak valid
-//       let respons = await request(app)
-//         .post("/login")
-//         .send({ credential: "data", password: data.password });
-//       expect(respons.status).toBe(401);
-//       expect(respons.body).toHaveProperty("msg", "username/password salah");
-//     });
-//   });
-// });
-
 describe("POST /register", () => {
   //!test register user berhasil
   describe("succes", () => {
